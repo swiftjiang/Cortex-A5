@@ -1,0 +1,46 @@
+###########################################
+# Simple Makefile for libslabhidtouart.so
+# using HIDAPI from Signal 11
+#
+# Christopher Menke
+# Silicon Labs
+# 10-03-2012
+###########################################
+
+all: libslabhidtouart.so
+
+OUT      ?= Release/Linux/
+
+CFLAGS   ?= -Wall -fPIC -g
+
+CXXFLAGS ?= -Wall -fPIC -g
+
+CC	  = arm-linux-gnueabihf-gcc
+
+CXX	  = arm-linux-gnueabihf-g++
+
+COBJS     = HIDAPI/hid-libusb.o
+CPPOBJS   = SLABHIDtoUART/HIDtoUART.o \
+	    SLABHIDtoUART/HIDtoUARTCP2110.o \
+	    SLABHIDtoUART/HIDtoUARTCP2114.o \
+	    SLABHIDDevice/HIDDevice.o \
+	    SLABHIDDevice/SLABHIDDevice.o \
+	    Common/ReportQueue.o
+OBJS      = $(COBJS) $(CPPOBJS)
+LIBS      = `pkg-config libusb-1.0 --libs` -lpthread  -lrt
+INCLUDES ?= -I./Common -I./HIDAPI -I./SLABHIDtoUART -I./SLABHIDDevice `pkg-config libusb-1.0 --cflags`
+
+
+libslabhidtouart.so: $(OBJS)
+	$(CXX) -fPIC -shared -Wl,-soname,libslabhidtouart.so.1 -o $(OUT)libslabhidtouart.so.1.0 $^ $(LIBS)
+	
+$(COBJS): %.o: %.c
+	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
+
+$(CPPOBJS): %.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $< -o $@
+
+clean:
+	rm -f $(OBJS) $(OUT)libslabhidtouart.so.1.0
+
+.PHONY: clean

@@ -1,0 +1,45 @@
+###########################################
+# Simple Makefile for SLABHIDtoUART test
+# using HIDAPI from Signal 11
+#
+# Christopher Menke
+# Silicon Labs
+# 10-03-2012
+###########################################
+
+all: main
+
+OUT      ?= Release/Linux/
+
+#CC       ?= arm-linux-gnueabihf-gcc
+CFLAGS   ?= -pthread -Wall -g
+
+#CXX      ?= arm-linux-gnueabihf-g++
+CXXFLAGS ?= -pthread -Wall -g
+
+COBJS     = HIDAPI/hid-libusb.o
+CPPOBJS   = main.o \
+	    SLABHIDtoUART/HIDtoUART.o \
+	    SLABHIDtoUART/HIDtoUARTCP2110.o \
+	    SLABHIDtoUART/HIDtoUARTCP2114.o \
+	    SLABHIDDevice/HIDDevice.o \
+	    SLABHIDDevice/SLABHIDDevice.o \
+	    Common/ReportQueue.o
+OBJS      = $(COBJS) $(CPPOBJS)
+LIBS      = `pkg-config libusb-1.0 --libs` -lm -lrt
+INCLUDES ?= -I./Common -I./HIDAPI -I./SLABHIDtoUART -I./SLABHIDDevice `pkg-config libusb-1.0 --cflags` -lm -lrt
+
+main: $(OBJS)
+	g++ $(CXXFLAGS) $(LDFLAGS) $^ $(LIBS) -o $(OUT)main
+	
+$(COBJS): %.o: %.c
+	gcc $(CFLAGS) -c $(INCLUDES) $< -o $@
+
+$(CPPOBJS): %.o: %.cpp
+	g++ $(CXXFLAGS) -c $(INCLUDES) $< -o $@
+
+clean:
+	rm -f $(OBJS) $(OUT)main
+
+.PHONY: clean
+

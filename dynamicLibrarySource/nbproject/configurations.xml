@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="80">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="SLABHIDtoUART" root=".">
+      <df name="Common">
+        <in>CriticalSectionLock.h</in>
+        <in>DeviceList.h</in>
+        <in>ReportQueue.cpp</in>
+        <in>ReportQueue.h</in>
+        <in>Types.h</in>
+      </df>
+      <df name="HIDAPI">
+        <in>hid-libusb.c</in>
+        <in>hidapi.h</in>
+      </df>
+      <df name="Release">
+        <df name="Linux">
+        </df>
+        <in>CP2114_Common.h</in>
+        <in>SLABCP2110.h</in>
+        <in>SLABCP2114.h</in>
+        <in>SLABHIDtoUART.h</in>
+      </df>
+      <df name="SLABHIDDevice">
+        <in>HIDDevice.cpp</in>
+        <in>HIDDevice.h</in>
+        <in>HIDDeviceVersion.h</in>
+        <in>SLABHIDDevice.cpp</in>
+        <in>SLABHIDDevice.h</in>
+      </df>
+      <df name="SLABHIDtoUART">
+        <in>CP2114_Common.h</in>
+        <in>HIDtoUART.cpp</in>
+        <in>HIDtoUART.h</in>
+        <in>HIDtoUARTCP2110.cpp</in>
+        <in>HIDtoUARTCP2114.cpp</in>
+        <in>HIDtoUARTVersion.h</in>
+        <in>Profiler.h</in>
+        <in>SLABCP2110.h</in>
+        <in>SLABCP2114.h</in>
+        <in>SLABHIDtoUART.h</in>
+        <in>UsbReports.h</in>
+      </df>
+      <in>main.cpp</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile-main-linux</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile-main-linux clean</cleanCommand>
+          <executablePath>Release/Linux/main</executablePath>
+          <cTool>
+            <incDir>
+              <pElem>/usr/include/libusb-1.0</pElem>
+              <pElem>SLABHIDDevice</pElem>
+              <pElem>SLABHIDtoUART</pElem>
+              <pElem>HIDAPI</pElem>
+              <pElem>Common</pElem>
+              <pElem>.</pElem>
+            </incDir>
+          </cTool>
+          <ccTool>
+            <incDir>
+              <pElem>/usr/include/libusb-1.0</pElem>
+              <pElem>SLABHIDDevice</pElem>
+              <pElem>SLABHIDtoUART</pElem>
+              <pElem>HIDAPI</pElem>
+              <pElem>Common</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <folder path="SLABHIDtoUART/Common">
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="SLABHIDtoUART/SLABHIDDevice">
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="SLABHIDtoUART/SLABHIDtoUART">
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>
